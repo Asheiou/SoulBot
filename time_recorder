@@ -1,0 +1,19 @@
++ping
++ping
++ping
+Pong!
++ping
+Pong!
++help
+```
+​No Category:
+  help Shows this message
+  ping 
+
+Type +help command for more info on a command.
+You can also type +help category for more info on a category.
+```
++help
+[NULL]
++ping
+Pong!
