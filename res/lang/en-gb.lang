@@ -3,3 +3,19 @@ ping
 Pong!
 help
 [NULL]
+display
+
+fetch
+Updating...
+Finished!
+language
+My language has been switched to 
+I don't speak 
+ version 
+This bot serves as an Instagram mirror for all of @sole_nyu's posts as well as a few other miscellaneous functions
+All commands use the prefix 
+The available commands are:
+help: Shows this message
+fetch: Downloads and caches all posts
+display: Shows latest cached posts from the latest upload date
+@EmilyOH for enquiries
