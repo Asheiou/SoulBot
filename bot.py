@@ -134,7 +134,7 @@ async def ping(ctx):
 async def help(ctx):
     ebd = discord.Embed( title = LANGUAGE[13].format( NAME, VERSION ), color = int(COLOR, 16) )
     
-    ebd.add_field(name = LANGUAGE[21],value = LANGUAGE[15].format(PREFIX),inline = False)
+    ebd.add_field(name = LANGUAGE[21],value = LANGUAGE[14] + '\n' + LANGUAGE[15].format(PREFIX),inline = False)
     ebd.add_field(name = LANGUAGE[16],value = LANGUAGE[17] + '\n' + LANGUAGE[18] + '\n' + LANGUAGE[19] + '\n',inline = False)
     ebd.set_footer(text = LANGUAGE[20])
 

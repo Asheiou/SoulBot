@@ -14,9 +14,9 @@ Je ne parle pas {}
 {} version {}
 On peut utiliser ce bot pour voir tous les posts de @sole_nyu, de même que plusieurs autres choses.
 {} est le préfixe de ce bot.
-Les commandes disponibles sont:
-aide: dit ce message
-obtient: met à jour les posts en cache
-montre: montre le dernier post de @sole_nyu en cache
+Les commandes disponibles sont
+aide : dit ce message
+obtient : met à jour les posts en cache
+montre : montre le dernier post de @sole_nyu en cache
 Si vous avez des problèmes ou des questions, veuillez mentionner @EmilyOH.
-INFO
+Info sur ce bot
