@@ -168,9 +168,9 @@ async def display(ctx):
 # Fetches images from Instagram
 @bot.command(name = LANGUAGE[7])
 async def fetch(ctx):
-    await ctx.send(LANGUAGE[8])
+    await ctx.send(embed = discord.Embed(title = LANGUAGE[8], color = int(COLOR, 16)))
     subprocess.Popen("instaloader --fast-update sole_nyu".split(), stdout=subprocess.PIPE)
-    await ctx.send(LANGUAGE[9])
+    await ctx.send(embed = discord.Embed(title = LANGUAGE[9], color = int(COLOR, 16)))
 
 # Change the language
 @bot.command(name = LANGUAGE[10])
@@ -178,9 +178,9 @@ async def language(ctx, arg0):
     global bot
     if(arg0 + LANGUAGE_FILE_EXTENSION in os.listdir("./res/lang/")):
         set_language("./res/lang/" + arg0 + LANGUAGE_FILE_EXTENSION)
-        await ctx.send(LANGUAGE[11].format(LANGUAGE[0]))
+        await ctx.send(embed = discord.Embed(title = LANGUAGE[11].format(LANGUAGE[0]), color = int(COLOR, 16)))
         return
-    await ctx.send(LANGUAGE[12].format(arg0))
+    await ctx.send(embed = discord.Embed(title = LANGUAGE[12].format(arg0), color = int(COLOR, 16)))
 
 # Test all functions
 @bot.command(name = "+DEBUG_TESTALL")
@@ -216,6 +216,13 @@ async def reload(ctx):
 @commands.has_role(732384059191328809)
 async def dev_comm(ctx, arg0):
     embed = discord.Embed(title = "[DEVTEST] [EMBED]", color = int(arg0, 16)).add_field(name = "[FIELD]", value = "[FIELD_DATA]", inline = False).set_footer(text = "[FOOTER]")
+    await ctx.send(embed = embed)
+
+# An embed for testing purposes
+@bot.command(name = "+DEBUG_RAINBOW")
+@commands.has_role(732384059191328809)
+async def dev_comm(ctx):
+    embed = discord.Embed()
     await ctx.send(embed = embed)
 
 bot.run(TOKEN)
