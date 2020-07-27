@@ -1,21 +1,22 @@
-français
+français - Ash
 ping
-Pong!
-Aidez-moi
+Pong !
+aide
 [NUL]
-afficher
+montre
 
-chercher
-Mise à jour ...
-Fini!
-Langue
-Ma langue est devenue
-Je ne parle pas
-  version
-Ce bot sert de miroir Instagram pour tous les messages de @ sole_nyu ainsi que pour quelques autres fonctions diverses
-Toutes les commandes utilisent le préfixe
+obtient
+Je suis en train de mettre à jour ...
+Je suis finie !
+La langue
+Ma langue est maintenant {}
+Je ne parle pas {}
+{} version {}
+On peut utiliser ce bot pour voir tous les posts de @sole_nyu, de même que plusieurs autres choses.
+{} est le préfixe de ce bot.
 Les commandes disponibles sont:
-help: affiche ce message
-fetch: télécharge et met en cache tous les messages
-affichage: affiche les derniers messages en cache à partir de la dernière date de téléchargement
-@EmilyOH pour les demandes
+aide: dit ce message
+obtient: met à jour les posts en cache
+montre: montre le dernier post de @sole_nyu en cache
+Si vous avez des problèmes ou des questions, veuillez mentionner @EmilyOH.
+INFO

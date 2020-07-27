@@ -78,14 +78,15 @@ NAME = PROJECTDATA[0]
 AUTHOR = PROJECTDATA[1]
 VERSION = PROJECTDATA[2]
 LANGUAGE_PATH = PROJECTDATA[3]
-BOTDATA = PROJECTDATA[4]
+BOTDATA_PATH = PROJECTDATA[4]
 IMAGE_DATA = PROJECTDATA[5]
 
 # Reads private bot data - file excluded from git
 
-BOTDATA = read_file(BOTDATA)
+BOTDATA = read_file(BOTDATA_PATH)
 TOKEN = BOTDATA[0]
 PREFIX = BOTDATA[1]
+COLOR = BOTDATA[2]
 
 # Loads language specified by command line args, otherwise loads language specified in project data
 
@@ -111,15 +112,11 @@ class SoulBot(commands.Bot):
         info("Command prefix is set to " + PREFIX)
         
     async def on_message(self, message):
-        write_append_file("time_recorder", message.content + '\n')
         if(message.author.bot): 
             return
         
-        if '++' in message.content:
-            if "Emily" in message.author.name:
-                return await bot.process_commands(message)
-            else:
-                return
+        write_append_file("time_recorder", message.content + '\n')
+    
         return await bot.process_commands(message)
 
 bot = SoulBot(command_prefix=PREFIX)
@@ -130,12 +127,18 @@ bot.remove_command("help")
 @bot.command(name = LANGUAGE[1])
 async def ping(ctx):
     debug("Pinged by " + ctx.author.name)
-    await ctx.send(LANGUAGE[2])
-
+    await ctx.send(embed = discord.Embed(title = LANGUAGE[2], color = int(COLOR, 16)))
+    
 # Help command
 @bot.command(name = LANGUAGE[3])
 async def help(ctx):
-    await ctx.send('>>> ```' + NAME + LANGUAGE[13] + VERSION + '\n\n' + LANGUAGE[14] + '\n\n' + LANGUAGE[15] + PREFIX + '\n' + LANGUAGE[16] + '\n\n' + LANGUAGE[17] + '\n\n' + LANGUAGE[18] + '\n\n' + LANGUAGE[19] + '\n\n' + LANGUAGE[20] + "```")
+    ebd = discord.Embed( title = LANGUAGE[13].format( NAME, VERSION ), color = int(COLOR, 16) )
+    
+    ebd.add_field(name = LANGUAGE[21],value = LANGUAGE[15].format(PREFIX),inline = False)
+    ebd.add_field(name = LANGUAGE[16],value = LANGUAGE[17] + '\n' + LANGUAGE[18] + '\n' + LANGUAGE[19] + '\n',inline = False)
+    ebd.set_footer(text = LANGUAGE[20])
+
+    await ctx.send(embed = ebd)
 
 # Displays the last day of images
 @bot.command(name = LANGUAGE[5])
@@ -175,12 +178,13 @@ async def language(ctx, arg0):
     global bot
     if(arg0 + LANGUAGE_FILE_EXTENSION in os.listdir("./res/lang/")):
         set_language("./res/lang/" + arg0 + LANGUAGE_FILE_EXTENSION)
-        await ctx.send(LANGUAGE[11] + LANGUAGE[0])
+        await ctx.send(LANGUAGE[11].format(LANGUAGE[0]))
         return
-    await ctx.send(LANGUAGE[12] + arg0)
+    await ctx.send(LANGUAGE[12].format(arg0))
 
 # Test all functions
 @bot.command(name = "+DEBUG_TESTALL")
+@commands.has_role(732384059191328809)
 async def test_all(ctx):
     await ping(ctx)
 
@@ -192,5 +196,26 @@ async def test_all(ctx):
     await fetch(ctx)
 
     await display(ctx)
+
+    await help(ctx)
+
+    await ctx.send("TEST PASSED")
+
+# Reloads resources from files
+@bot.command(name = "+DEBUG_RELOAD")
+@commands.has_role(732384059191328809)
+async def reload(ctx):
+    global PROJECTDATA
+    global BOTDATA
+    PROJECTDATA = read_file(PROJECTDATA_PATH)
+    BOTDATA = read_file(BOTDATA_PATH)
+    await ctx.send("Reloaded")
+
+# An embed for testing purposes
+@bot.command(name = "+DEBUG_DEVCOMM")
+@commands.has_role(732384059191328809)
+async def dev_comm(ctx, arg0):
+    embed = discord.Embed(title = "[DEVTEST] [EMBED]", color = int(arg0, 16)).add_field(name = "[FIELD]", value = "[FIELD_DATA]", inline = False).set_footer(text = "[FOOTER]")
+    await ctx.send(embed = embed)
 
 bot.run(TOKEN)
